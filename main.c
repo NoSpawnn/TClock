@@ -52,31 +52,33 @@ TimeDigits getTimeDigits(struct tm timeInfo) {
   };
 }
 
-void printTimeASCII(int rowSize, int colSize) {
+struct tm getTime() {
   time_t time_t = time(NULL);
-  struct tm timeInfo = *localtime(&time_t);
-  TimeDigits td = getTimeDigits(timeInfo);
-  CursorPos startPos, endPos;
-  int startRow = rowSize * 0.5 - 2, startCol = colSize * 0.5 - 53;
+  return *localtime(&time_t);
+}
+
+void printTimeASCII(int rowSize, int colSize) {
+  TimeDigits td = getTimeDigits(getTime());
+  int startRow = rowSize * 0.5 - 2, startCol = colSize * 0.5 - 53; // TODO: make less hardcoded
+  CursorPos endPos;
 
   eraseScreen();
   setCursorPos(startRow, startCol);
-  startPos = getCursorPos();
 
   endPos = printChar(CHARS[td.hourTens + 1]);
-  setCursorPos(startPos.row, endPos.col + PADDING);
+  setCursorPos(startRow, endPos.col + PADDING);
   endPos = printChar(CHARS[td.hourOnes + 1]);
-  setCursorPos(startPos.row + 1, endPos.col + PADDING);
+  setCursorPos(startRow + 1, endPos.col + PADDING);
   endPos = printChar(CHARS[0]); // :
-  setCursorPos(startPos.row, endPos.col + PADDING);
+  setCursorPos(startRow, endPos.col + PADDING);
   endPos = printChar(CHARS[td.minuteTens + 1]);
-  setCursorPos(startPos.row, endPos.col + PADDING);
+  setCursorPos(startRow, endPos.col + PADDING);
   endPos = printChar(CHARS[td.minuteOnes + 1]);
-  setCursorPos(startPos.row + 1, endPos.col + PADDING);
+  setCursorPos(startRow + 1, endPos.col + PADDING);
   endPos = printChar(CHARS[0]); // :
-  setCursorPos(startPos.row, endPos.col + PADDING);
+  setCursorPos(startRow, endPos.col + PADDING);
   endPos = printChar(CHARS[td.secondsTens + 1]);
-  setCursorPos(startPos.row, endPos.col + PADDING);
+  setCursorPos(startRow, endPos.col + PADDING);
   endPos = printChar(CHARS[td.secondsOnes + 1]);
 }
 

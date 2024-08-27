@@ -1,10 +1,12 @@
 #include "characters.h"
 #include "cursor.h"
+#include <asm-generic/ioctls.h>
 #include <signal.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/ioctl.h>
 #include <termios.h>
 #include <time.h>
 #include <unistd.h>
@@ -18,8 +20,6 @@ typedef struct {
   int secondsOnes;
 } TimeDigits;
 
-static const int START_ROW = 5;
-static const int START_COL = 10;
 static const int PADDING = 5;
 struct termios savedAttrs;
 
@@ -53,14 +53,15 @@ TimeDigits getTimeDigits(struct tm timeInfo) {
   };
 }
 
-void printTimeASCII() {
+void printTimeASCII(int rowSize, int colSize) {
   time_t time_t = time(NULL);
   struct tm timeInfo = *localtime(&time_t);
   TimeDigits td = getTimeDigits(timeInfo);
   CursorPos startPos, endPos;
+  int startRow = rowSize * 0.5 - 2, startCol = colSize * 0.5 - 53;
 
   eraseScreen();
-  setCursorPos(START_ROW, START_COL);
+  setCursorPos(startRow, startCol);
   startPos = getCursorPos();
 
   endPos = printChar(CHARS[td.hourTens + 1]);
@@ -98,9 +99,14 @@ int main() {
   tcsetattr(STDIN_FILENO, TCSANOW, &tAttr);
   hideCursor();
 
+  struct winsize w;
   char cmd;
   while (true) {
-    printTimeASCII();
+    // Get viewport/terminal size
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+
+    printTimeASCII(w.ws_row, w.ws_col);
+
     if (read(STDIN_FILENO, &cmd, 1) == 1 && cmd == 'q')
       handleExit();
   }

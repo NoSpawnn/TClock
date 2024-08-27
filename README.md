@@ -32,6 +32,6 @@ $ cp ./tclock ~/.local/bin
 
 ## TODO
 
-- [ ] Center clock in terminal
+- [x] Center clock in terminal
 - [ ] Custom/Optional fonts
 - [x] Fix `%` being printed when quitting?

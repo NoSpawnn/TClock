@@ -29,8 +29,8 @@ void setCursorPos(int rows, int cols) {
   printf("\033[%d;%df", rows, cols);
 }
 
-void hideCursor() { printf("\033[?25l"); };
+void hideCursor() { printf("\033[?25l"); }
 
-void showCursor() { printf("\033[?25h"); };
+void showCursor() { printf("\033[?25h"); }
 
 void eraseScreen() { printf("\033[2J"); }

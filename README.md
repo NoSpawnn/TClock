@@ -24,3 +24,7 @@ $ cp ./tclock ~/.local/bin
 ## Usage
 - Run the exectuable, quit with <kbd>Ctrl+C</kbd> or <kbd>q</kbd>
 
+## TODO
+- [ ] Center clock in terminal
+- [ ] Custom/Optional fonts
+- [ ] Fix `%` being printed when quitting?

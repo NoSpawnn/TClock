@@ -6,13 +6,13 @@
 ## Installation
 
 1. Clone the repo
-```console
+```sh
 $ git clone git@github.com:NoSpawnn/TClock.git
 $ cd TClock
 ```
 
 2. Build and run
-```console
+```sh
 # Build then run
 $ make
 $ ./tclock
@@ -22,7 +22,7 @@ $ make run
 ```
 
 3. Add it to your path if you want
-```console
+```sh
 $ cp ./tclock ~/.local/bin
 ```
 

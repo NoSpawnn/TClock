@@ -18,7 +18,7 @@ $ make
 $ ./tclock
 
 # Build and run
-$ make build
+$ make run
 ```
 
 3. Add it to your path if you want

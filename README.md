@@ -34,4 +34,4 @@ $ cp ./tclock ~/.local/bin
 
 - [ ] Center clock in terminal
 - [ ] Custom/Optional fonts
-- [ ] Fix `%` being printed when quitting?
+- [x] Fix `%` being printed when quitting?

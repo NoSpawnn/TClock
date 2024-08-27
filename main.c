@@ -86,9 +86,9 @@ void printTimeASCII() {
 }
 
 void handleExit() {
-  printf("\n");
   tcsetattr(STDIN_FILENO, TCSADRAIN, &savedAttrs);
   showCursor();
+  printf("\n");
   exit(0);
 }
 

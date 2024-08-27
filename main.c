@@ -59,7 +59,8 @@ struct tm getTime() {
 
 void printTimeASCII(int rowSize, int colSize) {
   TimeDigits td = getTimeDigits(getTime());
-  int startRow = rowSize * 0.5 - 2, startCol = colSize * 0.5 - 53; // TODO: make less hardcoded
+  int startRow = rowSize * 0.5 - 2,
+      startCol = colSize * 0.5 - 53; // TODO: make less hardcoded
   CursorPos endPos;
 
   eraseScreen();
@@ -89,6 +90,13 @@ void handleExit() {
   exit(0);
 }
 
+// Get viewport size
+struct winsize getWinSize() {
+  struct winsize w;
+  ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+  return w;
+}
+
 int main() {
   signal(SIGINT, handleExit);
   tcgetattr(STDIN_FILENO, &savedAttrs);
@@ -100,12 +108,9 @@ int main() {
   tcsetattr(STDIN_FILENO, TCSANOW, &tAttr);
   hideCursor();
 
-  struct winsize w;
   char cmd;
   while (true) {
-    // Get viewport/terminal size
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-
+    struct winsize w = getWinSize();
     printTimeASCII(w.ws_row, w.ws_col);
 
     if (read(STDIN_FILENO, &cmd, 1) == 1 && cmd == 'q')

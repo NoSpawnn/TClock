@@ -1,6 +1,5 @@
 #include "characters.h"
 #include "cursor.h"
-#include <asm-generic/ioctls.h>
 #include <signal.h>
 #include <stdbool.h>
 #include <stdio.h>

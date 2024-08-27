@@ -35,6 +35,7 @@ $ cp ./tclock ~/.local/bin
 - [x] Center clock in terminal
 - [ ] Custom/Optional fonts
 - [x] Fix `%` being printed when quitting?
+- [ ] Change how blocking is handled to avoid skipping seconds and make resizing more responsive
 
 ## Credits
 - [ASCII Art](https://www.asciiart.eu/text-to-ascii-art)

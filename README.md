@@ -35,3 +35,6 @@ $ cp ./tclock ~/.local/bin
 - [x] Center clock in terminal
 - [ ] Custom/Optional fonts
 - [x] Fix `%` being printed when quitting?
+
+## Credits
+- [ASCII Art](https://www.asciiart.eu/text-to-ascii-art)

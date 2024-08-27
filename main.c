@@ -42,11 +42,6 @@ CursorPos printChar(const char s[]) {
   return getCursorPos();
 }
 
-void printCursorPos() {
-  CursorPos p = getCursorPos();
-  printf("Row: %d Col: %d\n", p.row, p.col);
-}
-
 TimeDigits getTimeDigits(struct tm timeInfo) {
   return (TimeDigits){
       .hourTens = timeInfo.tm_hour / 10,
